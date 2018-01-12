@@ -6,7 +6,22 @@ python:
   - "3.5"
   - "3.6"
 install:
-  - sudo apt-get install fontforge python-fontforge
+  - mkdir -p ~/src/github.com/fontforge
+  - cd ~/src/github.com/fontforge
+  - git clone https://github.com/fontforge/fontforge.git
+  - cd fontforge
+  - ./bootstrap
+  - ./configure \
+        --with-x \
+        --prefix=/usr \
+        --enable-python-scripting \
+        --enable-pyextension \
+        --enable-shared \
+        --enable-gtk2-use \
+        --mandir=/usr/share/man \
+        --with-freetype-source="$srcdir"/freetype-2.6.1
+  - make
+
   - pip install -r requirements.txt
   - pip install -e .
 script:
