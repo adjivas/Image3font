@@ -8,4 +8,6 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install -e .
+script:
+  - hy image3font/image3font.hy --version
 cache: pip
