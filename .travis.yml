@@ -2,15 +2,13 @@ sudo: true
 language: python
 python:
   - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
 install:
-  - sudo apt-get install fontforge python-fontforge python2.7-fontforge 
+  - sudo apt-get install fontforge python2.7-fontforge 
   - pip install -r requirements.txt
   - pip install -e .
 script:
   - fontforge --version
+  - whereis python
   - python -c "import fontforge; print(fontforge)"
   - hy image3font/image3font.hy --version
 cache: pip
