@@ -7,10 +7,8 @@ install:
   - pip install -r requirements.txt
   - pip install -e .
 script:
-  - fontforge --version
-  - whereis python
-  - python2 -c "import fontforge; print(fontforge)"
-  - hy image3font/image3font.hy --version
+  - cd image3font
+  - hy image3font.hy --version
 addons:
     apt:
         packages:
