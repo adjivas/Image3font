@@ -4,7 +4,7 @@ python:
   - "2.7"
 install:
   - sudo apt-get remove -y python3
-  - sudo apt-get install fontforge python2.7-fontforge 
+  - sudo apt-get install python2.7-fontforge 
   - pip install -r requirements.txt
   - pip install -e .
 script:

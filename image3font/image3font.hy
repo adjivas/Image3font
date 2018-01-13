@@ -183,6 +183,7 @@
     (setv font (if (manifest.get "path") (fontforge.open (manifest.get "path")) (fontforge.font)))
   
     ;; Reference: https://fontforge.github.io/en-US/documentation/scripting/native/
+    (assert (submanifest.get "path"))
     (assert (submanifest.get "fontname"))
     (setv font.fontname (submanifest.get "fontname"))
     (setv font.familyname (or (submanifest.get "familyname") (manifest.get "fontname")))
