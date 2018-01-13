@@ -16,8 +16,8 @@
 
 (import [table[*name* *platform*]])
 
-(import [wand.image [Image]])
-(import [wand.display [display]])
+;; (import [wand.image [Image]])
+;; (import [wand.display [display]])
 
 ;; Program's Source
 (def *source* "src")
@@ -231,9 +231,9 @@
     (3table manifest glyphes))
 
 (defmain [&rest _]
-    (setv parser (argparse.ArgumentParser :prog *prog* :description "Create color fonts from a set of glyphes."))
-    (apply parser.add-argument ["-v" "--version"] {:action "store_true" :help "show the version and exit"})
-    (apply parser.add-argument ["-m" "--manifest"] {:default "image3font.toml" :help "specify the manifest"})
-  
+    (setv parser (argparse.ArgumentParser :prog (*prog*) :description "Create color fonts from a set of glyphes."))
+    (parser.add-argument "-v" "--version" :action "store_true" :help "show the version and exit")
+    (parser.add-argument "-m" "--manifest" :default "image3font.toml" :help "specify the manifest")
+
     (setv args (parser.parse-args))
-    (if args.version (print *prog* *version*) (3font (toml.load args.manifest))))
+    (if args.version (print (*prog*) (*version*)) (3font (toml.load args.manifest))))
