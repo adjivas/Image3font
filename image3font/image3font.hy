@@ -21,7 +21,7 @@
 ;; Program's name
 (def *prog* (constantly "image3font"))
 ;; Program's version
-(def *version* (constantly "0.1.0"))
+(def *version* (constantly "1.0.0"))
 
 ;; Fontforge's EM
 (def *font-em* 2048)
@@ -96,7 +96,9 @@
 ;;                                        (Glyph (subimage.make-blob "svg") (+ index subindex)))
 ;;             (partition (interleave (range (* x y))
 ;;                                    (list-comp (, a b) (a (range y) b (range x))))))))
-
+;;
+;; (if (not (os.path.isfile path)) (do))
+;;
 ;; Reference: http://docs.wand-py.org/en/0.4.4/guide/read.html#open-an-image-file
 ;; if the namefile containt '-', crop and return a set of image/vector
 ;; else convert the filename into a vector if isn't already and return it.
@@ -108,6 +110,8 @@
 ;;                            (.read (open path))
 ;;                            (.make-blob (Image :filename path) "svg"))
 ;;                        (int (first index) 16))]]))
+;;
+;; temp
 
 (defn 3image [name extension path]
     (setv index (.split name "-"))
