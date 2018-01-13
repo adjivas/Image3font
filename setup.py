@@ -5,11 +5,12 @@ from setuptools import find_packages, setup
 setup(
     name="image3font",
     version="1.0.0",
-    install_requires = ["hy>=0.10"],
     packages=["image3font"],
     package_data={
         "image3font": ["*.hy"],
     },
+    scripts = ["image3font/image3font.hy", "image3font/table.hy"],
+    install_requires = ["hy>=0.10"],
     author="adjivas",
     author_email="adjivas@users.noreply.github.com",
     maintainer="adjivas",
