@@ -23,7 +23,7 @@ src/{:x}.svg
 src/{:x}-{:x}.svg (need the wand dependency)
 ```
 * **image3font.toml** stores in the root of your project.
-* **image/SVG** goes in the src directory.
+* **image/SVG** goes in the **src** directory.
 
 ## Dependency
 * [*fontforge*](https://github.com/fontforge/fontforge) must be installed.
@@ -42,7 +42,7 @@ The *image3font.toml* file for each font is called its manifest. Every manifest 
 * **path** (optional) - Fontpath of input font. If not specified this will be infered from a empty font.
 * **source** (default = "src") - Can be used to configure the SVG's directory.
 ### [fontforge] section
-List of fields according to [FontForge/Script](https://fontforge.github.io/en-US/documentation/scripting/native)'s specification.
+List of fields according to [FontForge](https://fontforge.github.io/en-US/documentation/scripting/native)/Script's specification.
 * **path** - path where save the compiled font.
 * **fontname** - name contained in the postscript FontName field.
 * **familyname** (default = "fontname") - name contained in the postscript FamilyName field. If not specified this will be inferred as **fontname*.
@@ -86,10 +86,10 @@ List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typog
 
 ### Dependencies
 Many thanks goes to *command/etc*'s project:
-* [FontForge](https://github.com/fontforge/fontforge) - [GNU GPL](https://github.com/fontforge/fontforge/blob/master/LICENSE).
-* [FontTools](https://github.com/fonttools/fonttools) - [MIT Open Source License](https://github.com/fonttools/fonttools/blob/master/LICENSE).
-* [Wand](https://github.com/dahlia/wand) - [MIT Open Source License](https://github.com/dahlia/wand/blob/master/LICENSE).
-* [HyLang](https://github.com/hylang/hy) - [MIT Open Source License](https://github.com/hylang/hy/blob/master/LICENSE).
-* [docopt](https://github.com/docopt/docopt) - [MIT Open Source License](https://github.com/docopt/docopt/blob/master/LICENSE-MIT).
-* [Toml](https://github.com/uiri/toml) - [MIT Open Source License](https://github.com/uiri/toml/blob/master/LICENSE).
+* [FontForge](https://github.com/fontforge/fontforge) - [GNU GPL v3 license](https://github.com/fontforge/fontforge/blob/master/LICENSE).
+* [FontTools](https://github.com/fonttools/fonttools) - [MIT Open Source license](https://github.com/fonttools/fonttools/blob/master/LICENSE).
+* [Wand](https://github.com/dahlia/wand) - [MIT Open Source license](https://github.com/dahlia/wand/blob/master/LICENSE).
+* [HyLang](https://github.com/hylang/hy) - [MIT Open Source license](https://github.com/hylang/hy/blob/master/LICENSE).
+* [docopt](https://github.com/docopt/docopt) - [MIT Open Source license](https://github.com/docopt/docopt/blob/master/LICENSE-MIT).
+* [Toml](https://github.com/uiri/toml) - [MIT Open Source license](https://github.com/uiri/toml/blob/master/LICENSE).
 * [Wikipedia (for the picture **neko**!)](https://en.wikipedia.org/wiki/Catgirl)

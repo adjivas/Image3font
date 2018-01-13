@@ -189,11 +189,13 @@
     (if (submanifest.get "version")
         (setv font.version (str (submanifest.get "version"))))
   
+    ;; Reference: http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#4.h
     (setv liga (str "liga"))
     (setv latn (str "latn"))
     (setv dflt (str "dflt"))
+    (setv features (,(, liga (,(, latn dflt)))))
     ;; Reference: https://fontforge.github.io/en-US/documentation/scripting/native/scripting-alpha/#AddLookup
-    (font.addLookup "liga" "gsub_ligature" () (,(, liga (,(, latn dflt)))))
+    (font.addLookup "liga" "gsub_ligature" () features)
     (font.addLookupSubtable "liga" "liga")
   
     ;; Reference: https://www.microsoft.com/typography/otspec180/recom.htm § Glyph 0: the .notdef glyph
