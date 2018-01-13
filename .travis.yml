@@ -1,10 +1,6 @@
+sudo: false
 language: python
-before_install:
-  - sudo add-apt-repository --yes ppa:fontforge/fontforge
-  - sudo add-apt-repository -y ppa:chris-lea/node.js
-  - sudo add-apt-repository -y ppa:hash3g/ots
-  - sudo apt-get update -qq
-  - sudo apt-get install python-fontforge ttfautohint nodejs swig otsanitizer
+python: "2.7_with_system_site_packages"
 install:
   - pip install -r requirements.txt
   - pip install -e .
@@ -14,3 +10,8 @@ script:
   - python2 -c "import fontforge; print(fontforge)"
   - hy image3font/image3font.hy --version
 cache: pip
+addons:
+    apt:
+        packages:
+            - fontforge-nox
+            - python-fontforge
