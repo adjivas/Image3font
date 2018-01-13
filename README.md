@@ -1,20 +1,19 @@
 # Image3font
-A image's converter to font written in [FontForge](https://github.com/fontforge/fontforge)/[FontTools](https://github.com/fonttools/fonttools)' [Hy](https://github.com/hylang/hy) language.
-
 [![travis-badge][]][travis] [![license-badge][]][license]
+A image's converter to font written in [FontForge](https://github.com/fontforge/fontforge)/[FontTools](https://github.com/fonttools/fonttools)' [Hy](https://github.com/hylang/hy) language and the futur of [**image2font**](https://github.com/limaconoob/Image2font/)'s repository.
 
 [travis-badge]: https://travis-ci.org/adjivas/Image3font.svg?branch=master&style=flat
 [travis]: https://travis-ci.org/adjivas/Image3font
 [license-badge]: http://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square
 [license]: https://github.com/limaconoob/Image2font/blob/master/LICENSE
 
-## Usage
+### Usage
 See command help:
 * **-h, --help** - show this help message and exit.
 * **-v, --version** - show the version and exit.
 * **-m MANIFEST, --manifest MANIFEST** - specify the manifest.
 
-### Layout
+#### Layout
 *Image3font* uses conventions for file placement:
 ```
 image3font.toml
@@ -25,9 +24,9 @@ src/{:x}-{:x}.svg (need the wand dependency)
 * **image3font.toml** stores in the root of your project.
 * **image/SVG** goes in the **src** directory.
 
-## Dependency
+### Dependency
 * [*fontforge*](https://github.com/fontforge/fontforge) must be installed.
-### Requirement
+#### Requirement
 The [*requirements.txt*](requirements.txt) describes the *image3font*'s dependencies.
 * [**hy**](https://github.com/hylang/hy) - A dialect of Lisp that's embedded in Python
 * [**fonttools**](https://github.com/fonttools/fonttools) - A library to manipulate font files from Python.
@@ -37,11 +36,11 @@ The [*requirements.txt*](requirements.txt) describes the *image3font*'s dependen
 The [*requirements-wand.txt*](requirements-wand.txt) is optional, that needed to extract a sub-rectangle from an *image/SVG*.
 * [**wand**](https://github.com/dahlia/wand) - The ctypes-based simple [**ImageMagick**](https://github.com/ImageMagick/ImageMagick) binding for Python.
 
-## Manifest
+### Manifest
 The *image3font.toml* file for each font is called its manifest. Every manifest file consists of two fields and two sections:
 * **path** (optional) - Fontpath of input font. If not specified this will be infered from a empty font.
 * **source** (default = "src") - Can be used to configure the SVG's directory.
-### [fontforge] section
+#### [fontforge]'s section
 List of fields according to [FontForge](https://fontforge.github.io/en-US/documentation/scripting/native)/Script's specification.
 * **path** - path where save the compiled font.
 * **fontname** - name contained in the postscript FontName field.
@@ -52,7 +51,7 @@ List of fields according to [FontForge](https://fontforge.github.io/en-US/docume
 * **version** (optional)
 * **encoding** (default = "UnicodeFull")
 * **em** (default = 2028)
-### [fonttools] section
+#### [fonttools]'s section
 List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typography/otspec/name.htm#nameIDs)'s specification.
 * **copyright** - copyright string from the font vendor. © Copyright the Monotype Corporation plc, 1990
 * **familyname** - name the user sees. Times New Roman
@@ -81,10 +80,10 @@ List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typog
 * **dark_background** - Dark background palette name. No name string present, since this is not a color font.
 * **variations_postscript** - Variations PostScript name prefix. No name string present, since this is not a variable font.
 
-## License
+### License
 *Image3font*'s code in this repo uses the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) [license](https://raw.githubusercontent.com/adjivas/Image3font/master/LICENSE).
 
-### Dependencies
+#### Dependencies
 Many thanks goes to *command/etc*'s project:
 * [FontForge](https://github.com/fontforge/fontforge) - [GNU GPL v3 license](https://github.com/fontforge/fontforge/blob/master/LICENSE).
 * [FontTools](https://github.com/fonttools/fonttools) - [MIT Open Source license](https://github.com/fonttools/fonttools/blob/master/LICENSE).
