@@ -26,31 +26,32 @@ src/{:x}-{:x}.svg (need the wand dependency)
 * **image/SVG** goes in the src directory.
 
 ## Dependency
-* [**fontforge**](https://github.com/fontforge/fontforge) must be installed.
+* [*fontforge*](https://github.com/fontforge/fontforge) must be installed.
 ### Requirement
-The [**requirements.txt**](requirements.txt) describes the **image3font**'s dependencies.
+The [*requirements.txt*](requirements.txt) describes the *image3font*'s dependencies.
 * [**hy**](https://github.com/hylang/hy) - A dialect of Lisp that's embedded in Python
 * [**fonttools**](https://github.com/fonttools/fonttools) - A library to manipulate font files from Python.
 * [**docopt**](https://github.com/docopt/docopt) - Pythonic command line arguments parser.
 * [**toml**](https://github.com/uiri/toml) - Python lib for TOML.
-The [**requirements-wand.txt**](requirements-wand.txt) is optional, that needed to extract a sub-rectangle from an **image/SVG**.
+
+The [*requirements-wand.txt*](requirements-wand.txt) is optional, that needed to extract a sub-rectangle from an *image/SVG*.
 * [**wand**](https://github.com/dahlia/wand) - The ctypes-based simple [**ImageMagick**](https://github.com/ImageMagick/ImageMagick) binding for Python.
 
 ## Manifest
-The **image3font.toml** file for each font is called its manifest. Every manifest file consists of two fields and two sections:
-* **path** field (optional) - Fontpath of input font. If not specified this will be infered from a empty font.
-* **source** field (default = "src") - Can be used to configure the SVG's directory.
+The *image3font.toml* file for each font is called its manifest. Every manifest file consists of two fields and two sections:
+* **path** (optional) - Fontpath of input font. If not specified this will be infered from a empty font.
+* **source** (default = "src") - Can be used to configure the SVG's directory.
 ### [fontforge] section
 List of fields according to [FontForge/Script](https://fontforge.github.io/en-US/documentation/scripting/native)'s specification.
-* **path** field.
-* **fontname** field - name contained in the postscript FontName field.
-* **familyname** field (default = "fontname") - name contained in the postscript FamilyName field. If not specified this will be inferred as **fontname*.
-* **fullname** field (default = "fontname") - name contained in the postscript FullName field. If not specified this will be inferred as **fontname*.
-* **weight** field (optional) - name contained in the postscript Weight field.
-* **copyright** field (optional) - name contained in the postscript Notice field.
-* **version** field (optional)
-* **encoding** field (default = "UnicodeFull")
-* **em** field (default = 2028)
+* **path** - path where save the compiled font.
+* **fontname** - name contained in the postscript FontName field.
+* **familyname** (default = "fontname") - name contained in the postscript FamilyName field. If not specified this will be inferred as **fontname*.
+* **fullname** (default = "fontname") - name contained in the postscript FullName field. If not specified this will be inferred as **fontname*.
+* **weight** (optional) - name contained in the postscript Weight field.
+* **copyright** (optional) - name contained in the postscript Notice field.
+* **version** (optional)
+* **encoding** (default = "UnicodeFull")
+* **em** (default = 2028)
 ### [fonttools] section
 List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typography/otspec/name.htm#nameIDs)'s specification.
 * **copyright** - copyright string from the font vendor. © Copyright the Monotype Corporation plc, 1990
@@ -81,11 +82,14 @@ List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typog
 * **variations_postscript** - Variations PostScript name prefix. No name string present, since this is not a variable font.
 
 ## License
-**image3font**'s code in this repo uses the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) [license](https://raw.githubusercontent.com/adjivas/Image3font/master/LICENSE).
+*image3font*'s code in this repo uses the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) [license](https://raw.githubusercontent.com/adjivas/Image3font/master/LICENSE).
 
 ### Dependencies
-Many thanks goes to **command/etc**'s project:
-* [FontForge](https://github.com/fontforge/fontforge)
-* [FontTools](https://github.com/fonttools/fonttools)
-* [Wand](https://github.com/dahlia/wand)
+Many thanks goes to *command/etc*'s project:
+* [FontForge](https://github.com/fontforge/fontforge) - (GNU GPL)[https://github.com/fontforge/fontforge/blob/master/LICENSE].
+* [FontTools](https://github.com/fonttools/fonttools) - (MIT Open Source License)[https://github.com/fonttools/fonttools/blob/master/LICENSE].
+* [Wand](https://github.com/dahlia/wand) - (MIT Open Source License)[https://github.com/dahlia/wand/blob/master/LICENSE].
+* [HyLang](https://github.com/hylang/hy) - (MIT Open Source License)[https://github.com/hylang/hy/blob/master/LICENSE].
+* [docopt](https://github.com/docopt/docopt) - (MIT Open Source License)[https://github.com/docopt/docopt/blob/master/LICENSE-MIT].
+* [Toml](https://github.com/uiri/toml) - (MIT Open Source License)[https://github.com/uiri/toml/blob/master/LICENSE].
 * [Wikipedia (for the picture **neko**!)](https://en.wikipedia.org/wiki/Catgirl)
