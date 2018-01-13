@@ -86,10 +86,10 @@ List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typog
 
 ### Dependencies
 Many thanks goes to *command/etc*'s project:
-* [FontForge](https://github.com/fontforge/fontforge) - (GNU GPL)[https://github.com/fontforge/fontforge/blob/master/LICENSE].
-* [FontTools](https://github.com/fonttools/fonttools) - (MIT Open Source License)[https://github.com/fonttools/fonttools/blob/master/LICENSE].
-* [Wand](https://github.com/dahlia/wand) - (MIT Open Source License)[https://github.com/dahlia/wand/blob/master/LICENSE].
-* [HyLang](https://github.com/hylang/hy) - (MIT Open Source License)[https://github.com/hylang/hy/blob/master/LICENSE].
-* [docopt](https://github.com/docopt/docopt) - (MIT Open Source License)[https://github.com/docopt/docopt/blob/master/LICENSE-MIT].
-* [Toml](https://github.com/uiri/toml) - (MIT Open Source License)[https://github.com/uiri/toml/blob/master/LICENSE].
+* [FontForge](https://github.com/fontforge/fontforge) - [GNU GPL](https://github.com/fontforge/fontforge/blob/master/LICENSE).
+* [FontTools](https://github.com/fonttools/fonttools) - [MIT Open Source License](https://github.com/fonttools/fonttools/blob/master/LICENSE).
+* [Wand](https://github.com/dahlia/wand) - [MIT Open Source License](https://github.com/dahlia/wand/blob/master/LICENSE).
+* [HyLang](https://github.com/hylang/hy) - [MIT Open Source License](https://github.com/hylang/hy/blob/master/LICENSE).
+* [docopt](https://github.com/docopt/docopt) - [MIT Open Source License](https://github.com/docopt/docopt/blob/master/LICENSE-MIT).
+* [Toml](https://github.com/uiri/toml) - [MIT Open Source License](https://github.com/uiri/toml/blob/master/LICENSE).
 * [Wikipedia (for the picture **neko**!)](https://en.wikipedia.org/wiki/Catgirl)
