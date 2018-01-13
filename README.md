@@ -28,14 +28,14 @@ src/{:x}-{:x}.svg (need the wand dependency)
 ### Dependency
 * [*fontforge*](https://github.com/fontforge/fontforge) must be installed.
 #### Requirement
-The [*requirements.txt*](requirements.txt) describes the *image3font*'s dependencies.
-* [**hy**](https://github.com/hylang/hy) - A dialect of Lisp that's embedded in Python
+The [*requirements.txt*](requirements.txt) describes the *image3font*'s dependencies:
+* [**hy**](https://github.com/hylang/hy) - A dialect of Lisp that's embedded in Python.
 * [**fonttools**](https://github.com/fonttools/fonttools) - A library to manipulate font files from Python.
 * [**docopt**](https://github.com/docopt/docopt) - Pythonic command line arguments parser.
 * [**toml**](https://github.com/uiri/toml) - Python lib for TOML.
 
-The [*requirements-wand.txt*](requirements-wand.txt) is optional, that needed to extract a sub-rectangle from an *image/SVG*.
-* [**wand**](https://github.com/dahlia/wand) - The ctypes-based simple [**ImageMagick**](https://github.com/ImageMagick/ImageMagick) binding for Python.
+The [*requirements-wand.txt*](requirements-wand.txt) is optional, that needed to extract a sub-rectangle from an *image/SVG*:
+* [**wand**](https://github.com/dahlia/wand) - The ctypes-based simple [**ImageMagick**](https://github.com/ImageMagick/ImageMagick) binding for Python (tested on imagemagick6 6.9.9.33-1).
 
 ### Manifest
 The *image3font.toml* file for each font is called its manifest. Every manifest file consists of two fields and two sections:
@@ -80,6 +80,13 @@ List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typog
 * **light_background** - Light background palette name. No name string present, since this is not a color font.
 * **dark_background** - Dark background palette name. No name string present, since this is not a color font.
 * **variations_postscript** - Variations PostScript name prefix. No name string present, since this is not a variable font.
+
+### Knowledge
+This is a reading list of material relevant to *Image3Font*. It includes prior research that has - at one time or another - influenced the design of *image3font*, as well as publications about *imag3font*.
+* [SVG in OpenType](https://www.w3.org/2013/10/SVG_in_OpenType) - SVG Glyphs in OpenType Specification.
+* [otspec](https://www.microsoft.com/typography/otspec) - OpenType specification.
+* [FontForge scripting](https://fontforge.github.io/en-US/documentation/scripting/native) - Writing scripts to change fonts in FontForge.
+* [Adobe Opentype](http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) - Adobe OpenType feature.
 
 ### License
 *Image3font*'s code in this repo uses the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) [license](https://raw.githubusercontent.com/adjivas/Image3font/master/LICENSE).
