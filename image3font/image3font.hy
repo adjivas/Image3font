@@ -16,9 +16,6 @@
 
 (import [table[*name* *platform*]])
 
-;; (import [wand.image [Image]])
-;; (import [wand.display [display]])
-
 ;; Program's Source
 (def *source* "src")
 ;; Program's name
@@ -86,10 +83,12 @@
       (setv self.id id)
       (self.root.set "id" (.format "glyph{:d}" id))))
 
-;; http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html#crop-images
+;; Reference: http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html#crop-images
 ;; crop a image from index's argument by  *width*/*height*'s global
 ;;! TODO have a range argument: start, end.
 ;;(defn 3crop [image &optional [index 0xe000]]
+;; (import [wand.image [Image]])
+;; (import [wand.display [display]])
 ;;  (setv (, width  height) image.size)
 ;;  (setv (, x y) (, (int (/ width *width*)) (int (/ height *height*))))
 ;;  (list (map (fn [(, subindex (, y x))] (setv subimage (image.clone))
@@ -98,7 +97,7 @@
 ;;             (partition (interleave (range (* x y))
 ;;                                    (list-comp (, a b) (a (range y) b (range x))))))))
 
-;; http://docs.wand-py.org/en/0.4.4/guide/read.html#open-an-image-file
+;; Reference: http://docs.wand-py.org/en/0.4.4/guide/read.html#open-an-image-file
 ;; if the namefile containt '-', crop and return a set of image/vector
 ;; else convert the filename into a vector if isn't already and return it.
 ;;(defn 3image [name extension path]
@@ -126,7 +125,7 @@
     (setv submanifest (manifest.get "fontools"))
 
     ;; Avoid "ns0:"
-    ;; Reference : https://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.register_namespace
+    ;; Reference: https://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.register_namespace
     (ET.register-namespace "" "http://www.w3.org/2000/svg")
 
     (setv cmap (font.get "cmap"))
