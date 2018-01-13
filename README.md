@@ -82,7 +82,7 @@ List of fields according to [FontTools/Name-IDs](https://www.microsoft.com/typog
 * **variations_postscript** - Variations PostScript name prefix. No name string present, since this is not a variable font.
 
 ## License
-*image3font*'s code in this repo uses the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) [license](https://raw.githubusercontent.com/adjivas/Image3font/master/LICENSE).
+*Image3font*'s code in this repo uses the [GNU GPL v3](http://www.gnu.org/licenses/gpl-3.0.html) [license](https://raw.githubusercontent.com/adjivas/Image3font/master/LICENSE).
 
 ### Dependencies
 Many thanks goes to *command/etc*'s project:

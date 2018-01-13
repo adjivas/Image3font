@@ -174,7 +174,7 @@
     (setv submanifest (manifest.get "fontforge"))
     (setv font (if (manifest.get "path") (fontforge.open (manifest.get "path")) (fontforge.font)))
   
-    ;; Reference: https://fontforge.github.io/en-US/documentation/scripting/native/
+    ;; Reference: https://fontforge.github.io/en-US/documentation/scripting/native
     (assert (submanifest.get "path"))
     (assert (submanifest.get "fontname"))
     (setv font.fontname (submanifest.get "fontname"))
@@ -196,9 +196,10 @@
     (font.addLookup "liga" "gsub_ligature" () (,(, liga (,(, latn dflt)))))
     (font.addLookupSubtable "liga" "liga")
   
-    ;; Reference: https://www.microsoft.com/typography/otspec170/default.htm § First Four Glyphs in Fonts
+    ;; Reference: https://www.microsoft.com/typography/otspec180/recom.htm § Glyph 0: the .notdef glyph
     (setv glyph (font.createChar -1 ".notdef"))
     (setv glyph.width 0)
+    ;; Reference: https://www.microsoft.com/typography/otspec170/recom.htm § First Four Glyphs in Fonts
     (setv glyph (font.createChar 0x0 ".null"))
     (setv glyph.width *width*) 
     (setv glyph (font.createChar 0xD "CR"))
