@@ -35,6 +35,8 @@
 
 ;; The structure Glyph is a path by id
 (defclass Glyph [object]
+    [path id]
+
     ;; Return a structure Glyph
     (defn --init-- [self path id]
         (setv self.path path)
@@ -56,7 +58,6 @@
             (do (setv width (re.sub "[^0-9\.]" "" (get root.attrib "width")))
                 (del (get root.attrib "width"))))
 
-
         (setv scale (/ *font-em* (int height)))
         (setv x 0)
         (setv y (* -1 (- *font-em* (* *font-em* .2))))
@@ -68,16 +69,8 @@
 
         (setv self.height (float height))
         (setv self.width (float width))
-      
+
         (setv self.root root))
-
-  ;; Return path
-  (defn get-path[self]
-      self.path)
-
-  ;; Return id
-  (defn get-id[self]
-      self.id)
 
   ;; Return glyph width
   (defn get-width[self]
@@ -88,10 +81,10 @@
       (setv data (ET.tostring self.root :encoding "UTF-8"))
       [data self.id self.id])
 
-  ;; set the glyph identifier as glyph<glyphID> https://www.w3.org/2013/10/SVG_in_OpenType/#glyphids
-  (defn set-id[self index]
-      (setv self.id index)
-      (self.root.set "id" (.format "glyph{:d}" index))))
+  ;; Set the glyph identifier as glyph<glyphID> https://www.w3.org/2013/10/SVG_in_OpenType/#glyphids
+  (defn set-id[self id]
+      (setv self.id id)
+      (self.root.set "id" (.format "glyph{:d}" id))))
 
 ;; http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html#crop-images
 ;; crop a image from index's argument by  *width*/*height*'s global
@@ -133,6 +126,7 @@
     (setv submanifest (manifest.get "fontools"))
 
     ;; Avoid "ns0:"
+    ;; Reference : https://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.register_namespace
     (ET.register-namespace "" "http://www.w3.org/2000/svg")
 
     (setv cmap (font.get "cmap"))
@@ -143,7 +137,7 @@
     (setv table (table_S_V_G_))
     (setv table.colorPalettes None)
     (setv table.docList (list (map (fn [glyph]
-                                       (glyph.set-id (font.getGlyphID (cmap.get (glyph.get-id))))
+                                       (glyph.set-id (font.getGlyphID (cmap.get glyph.id)))
                                        (glyph.get-svg))
                               glyphes)))
 
@@ -176,7 +170,6 @@
     (font.save hide)
     (os.rename hide path))
 
-
 ;; open or create a font, configure this font according to the manifest, add a ligature, add recommended glyphes.
 (defn 3font [manifest]
     (setv submanifest (manifest.get "fontforge"))
@@ -204,8 +197,7 @@
     (font.addLookup "liga" "gsub_ligature" () (,(, liga (,(, latn dflt)))))
     (font.addLookupSubtable "liga" "liga")
   
-    ;; Reference: https://www.microsoft.com/typography/otspec/recom.htm
-    ;;! TODO: more source information
+    ;; Reference: https://www.microsoft.com/typography/otspec170/default.htm § First Four Glyphs in Fonts
     (setv glyph (font.createChar -1 ".notdef"))
     (setv glyph.width 0)
     (setv glyph (font.createChar 0x0 ".null"))
@@ -217,8 +209,8 @@
 
     (setv glyphes (3glyph :source (or (manifest.get "source") *source*)))
     (list (map (fn [glyph]
-                   (setv char (font.createChar (glyph.get-id)))
-                   (char.importOutlines (glyph.get-path))
+                   (setv char (font.createChar glyph.id))
+                   (char.importOutlines glyph.path)
                    (setv char.width (glyph.get-width))
                    (char.removeOverlap)
                    (char.simplify)

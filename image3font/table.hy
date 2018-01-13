@@ -1,8 +1,8 @@
-;; name — Naming Table: https://www.microsoft.com/typography/otspec/name.htm
+;; name — Naming Table: https://www.microsoft.com/typography/otspec170/name.htm
 
-;; Platform IDs: https://www.microsoft.com/typography/otspec/name.htm#platformIDs
+;; Platform IDs: https://www.microsoft.com/typography/otspec170/name.htm#plat
 (def *platform* {
-  ;; Unicode platform-specific encoding and language IDs (platform ID = 0): https://www.microsoft.com/typography/otspec/name.htm#encLangIDs_platID0
+  ;; Unicode platform-specific encoding and language IDs (platform ID = 0): https://www.microsoft.com/typography/otspec170/name.htm#enc0
   :unicode {
     :id 0
     ;; encoding IDs
@@ -23,7 +23,7 @@
       :unicode-full 6}
     ;; Language ID
     :language 0}
-  ;; Macintosh platform-specific encoding and language IDs (platform ID = 1): https://www.microsoft.com/typography/otspec/name.htm#encLangIDs_platID1
+  ;; Macintosh platform-specific encoding and language IDs (platform ID = 1): https://www.microsoft.com/typography/otspec170/name.htm#ENC1
   :macintosh {
     :id 1
     ;; Macintosh encoding IDs (script manager codes)
@@ -181,9 +181,9 @@
       :greek-polytonic 148
       :greenlandic 149
       :azerbaijani-roman-script 150}}
-  ;; ISO specific encoding and language IDs (platform ID = 2) [Deprecated]: https://www.microsoft.com/typography/otspec/name.htm#encLangIDs_platID2
+  ;; ISO specific encoding and language IDs (platform ID = 2) [Deprecated]: https://www.microsoft.com/typography/otspec170/name.htm#enc2
   ;; :isospecific None
-  ;; Windows platform-specific encoding and language IDs (platform ID= 3): https://www.microsoft.com/typography/otspec/name.htm#encLangIDs_platID3
+  ;; Windows platform-specific encoding and language IDs (platform ID= 3): https://www.microsoft.com/typography/otspec170/name.htm#enc3
   :windows {
     :id 2
     ;; Windows encoding IDs
@@ -556,7 +556,7 @@
       :yoruba {
         :nigeria 0x046a}}})
 
-;; Name IDs: https://www.microsoft.com/typography/otspec/name.htm#nameIDs
+;; Name IDs: https://www.microsoft.com/typography/otspec170/name.htm § NameIDs
 (def *name* [
   ;; The copyright string from the font vendor. © Copyright the Monotype Corporation plc, 1990
   "copyright"
