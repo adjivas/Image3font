@@ -16,7 +16,7 @@ setup(
         "docopt",
         "toml",
     ],
-    extras_require = ["wand"],
+#    extras_require = ["wand"],
     author="adjivas",
     author_email="adjivas@users.noreply.github.com",
     maintainer="adjivas",
