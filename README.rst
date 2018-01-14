@@ -233,22 +233,17 @@ Dependencies
 
 Many thanks goes to *command/etc*\ ’s project:
 
-- `FontForge <https://github.com/fontforge/fontforge>`__ - `GNU GPL v3 license 
-<https://github.com/fontforge/fontforge/blob/master/LICENSE>`__.
+- `FontForge <https://github.com/fontforge/fontforge>`__ - `GNU GPL v3 license <https://github.com/fontforge/fontforge/blob/master/LICENSE>`__.
 
-- `FontTools <https://github.com/fonttools/fonttools>`__ - `MIT Open Source license 
-<https://github.com/fonttools/fonttools/blob/master/LICENSE>`__.
+- `FontTools <https://github.com/fonttools/fonttools>`__ - `MIT Open Source license <https://github.com/fonttools/fonttools/blob/master/LICENSE>`__.
 
-- `HyLang <https://github.com/hylang/hy>`__ - `MIT Open Source license 
-<https://github.com/hylang/hy/blob/master/LICENSE>`__. 
+- `HyLang <https://github.com/hylang/hy>`__ - `MIT Open Source license <https://github.com/hylang/hy/blob/master/LICENSE>`__.
 
-- `docopt <https://github.com/docopt/docopt>`__ - `MIT Open Source license 
-<https://github.com/docopt/docopt/blob/master/LICENSE-MIT>`__.
+- `docopt <https://github.com/docopt/docopt>`__ - `MIT Open Source license <https://github.com/docopt/docopt/blob/master/LICENSE-MIT>`__.
 
-- `Toml <https://github.com/uiri/toml>`__ - `MIT Open Source license <https://github.com/uiri/toml/blob/master/LICENSE>`__. 
-\*
+- `Toml <https://github.com/uiri/toml>`__ - `MIT Open Source license <https://github.com/uiri/toml/blob/master/LICENSE>`__.
 
-- `Wikipedia (for the picture neko!) <https://en.wikipedia.org/wiki/Catgirl>`__
+- `Wikipedia (for the picture neko!) <https://en.wikipedia.org/wiki/Catgirl>`__.
 
 .. |travis-badge| image:: https://travis-ci.org/adjivas/Image3font.svg?branch=master&style=flat
    :target: https://travis-ci.org/adjivas/Image3font
