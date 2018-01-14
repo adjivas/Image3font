@@ -218,7 +218,8 @@ of *image3font*, as well as publications about *imag3font*.
 - `Otspec <https://www.microsoft.com/typography/otspec>`__ - OpenType specification. 
 
 - `FontForge scripting <https://fontforge.github.io/en-US/documentation/scripting/native>`__ Writing scripts to change fonts 
-in FontForge. 
+in FontForge.
+
 - `Adobe Opentype <http://www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html>`__ Adobe OpenType feature.
 
 License
