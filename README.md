@@ -1,14 +1,14 @@
 # Image3font
-[![travis-badge][]][travis] [![project-badge][]][project] [![project-badge][]][project] 
+[![travis-badge][]][travis] [![project-badge][]][project] [![license-badge][]][license] 
 
 A image's converter to font written in [FontForge](https://github.com/fontforge/fontforge)/[FontTools](https://github.com/fonttools/fonttools)' [Hy](https://github.com/hylang/hy) language and the futur of [**image2font**](https://github.com/limaconoob/Image2font/)'s repository.
 
 [travis-badge]: https://travis-ci.org/adjivas/Image3font.svg?branch=master&style=flat
 [travis]: https://travis-ci.org/adjivas/Image3font
-[license-badge]: http://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square
-[license]: https://github.com/limaconoob/Image2font/blob/master/LICENSE
 [project]: https://pypi.org/project/image3font
 [project-badge]: https://img.shields.io/pypi/v/image3font.svg
+[license-badge]: http://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square
+[license]: https://github.com/adjivas/Image3font/blob/master/LICENSE
 
 ### Installation
 The [**image3font**](https://pypi.org/project/image3font) package is listed in the Python Package Index (PyPI), so you can install it with pip:
