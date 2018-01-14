@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="image3font",
-    version="1.0.0",
+    version="1.0.1",
     packages=["image3font"],
     package_data={
         "image3font": ["*.hy"],
