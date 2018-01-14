@@ -22,7 +22,7 @@ setup(
     maintainer="adjivas",
     maintainer_email="adjivas@users.noreply.github.com",
     keywords=["fontforge", "fonttools"],
-    description="""a image's converter to font written in Fontforge/FontTools's Hy script.""",
+    description="""A image's converter to font written in Fontforge/FontTools's Hy script.""",
     long_description=open("README.rst").read(),
     include_package_data=True,
     url="https://adjivas.github.io/image3font",
