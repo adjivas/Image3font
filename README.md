@@ -20,7 +20,7 @@ See command help:
 image3font.toml
 src/
 src/{:x}.svg
-src/{:x}-.svg (need the wand dependency)
+<!-- src/{:x}-.svg (need the wand dependency) -->
 ```
 * **image3font.toml** stores in the root of your project.
 * **image/SVG** goes in the **src** directory.
@@ -34,8 +34,10 @@ The [*requirements.txt*](requirements.txt) describes the *image3font*'s dependen
 * [**docopt**](https://github.com/docopt/docopt) - Pythonic command line arguments parser.
 * [**toml**](https://github.com/uiri/toml) - Python lib for TOML.
 
+<!--
 The [*requirements-wand.txt*](requirements-wand.txt) is optional, that needed to extract a sub-rectangle from an *image/SVG*:
 * [**wand**](https://github.com/dahlia/wand) - The ctypes-based simple [**ImageMagick**](https://github.com/ImageMagick/ImageMagick) binding for Python (tested on imagemagick6 6.9.9.33-1).
+-->
 
 ### Manifest
 The *image3font.toml* file for each font is called its manifest. Every manifest file consists of two fields and two sections:
@@ -95,7 +97,7 @@ This is a reading list of material relevant to *Image3Font*. It includes prior r
 Many thanks goes to *command/etc*'s project:
 * [FontForge](https://github.com/fontforge/fontforge) - [GNU GPL v3 license](https://github.com/fontforge/fontforge/blob/master/LICENSE).
 * [FontTools](https://github.com/fonttools/fonttools) - [MIT Open Source license](https://github.com/fonttools/fonttools/blob/master/LICENSE).
-* [Wand](https://github.com/dahlia/wand) - [MIT Open Source license](https://github.com/dahlia/wand/blob/master/LICENSE).
+<!-- * [Wand](https://github.com/dahlia/wand) - [MIT Open Source license](https://github.com/dahlia/wand/blob/master/LICENSE). -->
 * [HyLang](https://github.com/hylang/hy) - [MIT Open Source license](https://github.com/hylang/hy/blob/master/LICENSE).
 * [docopt](https://github.com/docopt/docopt) - [MIT Open Source license](https://github.com/docopt/docopt/blob/master/LICENSE-MIT).
 * [Toml](https://github.com/uiri/toml) - [MIT Open Source license](https://github.com/uiri/toml/blob/master/LICENSE).
