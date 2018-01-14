@@ -86,40 +86,35 @@
 ;; Reference: http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html#crop-images
 ;; crop a image from index's argument by  *width*/*height*'s global
 ;;! TODO have a range argument: start, end.
-;;(defn 3crop [image &optional [index 0xe000]]
-;; (import [wand.image [Image]])
-;; (import [wand.display [display]])
-;;  (setv (, width  height) image.size)
-;;  (setv (, x y) (, (int (/ width *width*)) (int (/ height *height*))))
-;;  (list (map (fn [(, subindex (, y x))] (setv subimage (image.clone))
-;;                                        (subimage.crop (* x *width*) (* y *height*) :width *width* :height *height*)
-;;                                        (Glyph (subimage.make-blob "svg") (+ index subindex)))
-;;             (partition (interleave (range (* x y))
-;;                                    (list-comp (, a b) (a (range y) b (range x))))))))
-;;
-;; (if (not (os.path.isfile path)) (do))
-;;
 ;; Reference: http://docs.wand-py.org/en/0.4.4/guide/read.html#open-an-image-file
 ;; if the namefile containt '-', crop and return a set of image/vector
 ;; else convert the filename into a vector if isn't already and return it.
-;;(defn 3image [name extension path]
-;;    (setv index (.split name "-"))
-;;    (cond [(string? (second index)) (3crop (Image :filename path)
-;;    				(int (first index) 16))]
-;;          [True [(Glyph (if (= extension ".svg")
-;;                            (.read (open path))
-;;                            (.make-blob (Image :filename path) "svg"))
-;;                        (int (first index) 16))]]))
-;;
-;; temp
 
-(defn 3image [name extension path]
-    (setv index (.split name "-"))
-    (Glyph path (int (first index) 16)))
+(def *width* 150)
+(def *height* 200)
 
+(defn 3crop [source path &optional [begindex 0xe000]]
+  (import [wand.image [Image]])
+  (import [wand.display [display]])
+  (setv image (Image :filename path))
+  (setv (, width  height) image.size)
+  (setv (, x y) (, (int (/ width *width*)) (int (/ height *height*))))
+  (list (map (fn [(, supindex (, y x))] (setv subimage (image.clone))
+                                        (setv index (+ begindex supindex))
+                                        (setv path (os.path.join source (.format "{:x}.svg" index)))
+                                        (print path  (* x *width*) (* y *height*) *width* *height*)
+                                        (subimage.crop (* x *width*) (* y *height*) :width *width* :height *height*)
+                                        (subimage.save :filename path)
+                                        (Glyph path index))
+             (partition (interleave (range (* x y))
+                                    (list-comp (, a b) (a (range y) b (range x))))))))
 
 (defn 3glyph [&optional [source *source*]]
-    (flatten (map (fn [(, (, name extension) path)] (3image name extension path))
+    (flatten (map (fn [(, (, name extension) path)] 
+                       (setv index (.split name "-"))
+                       (cond [(string? (second index)) (3crop source path :begindex (int (first index) 16))]
+                             [True (Glyph path (int (first index) 16))])
+                  )
                   (list (map (fn [file] (, (os.path.splitext file) (os.path.join source file)))
                              (sorted (os.listdir source)))))))
 ;; add svg, namerecord

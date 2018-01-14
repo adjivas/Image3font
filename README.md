@@ -1,4 +1,4 @@
-# Image3font
+# ImageⅢfont
 [![travis-badge][]][travis] [![license-badge][]][license]
 
 A image's converter to font written in [FontForge](https://github.com/fontforge/fontforge)/[FontTools](https://github.com/fonttools/fonttools)' [Hy](https://github.com/hylang/hy) language and the futur of [**image2font**](https://github.com/limaconoob/Image2font/)'s repository.
@@ -20,7 +20,7 @@ See command help:
 image3font.toml
 src/
 src/{:x}.svg
-src/{:x}-{:x}.svg (need the wand dependency)
+src/{:x}-.svg (need the wand dependency)
 ```
 * **image3font.toml** stores in the root of your project.
 * **image/SVG** goes in the **src** directory.
