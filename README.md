@@ -8,6 +8,12 @@ A image's converter to font written in [FontForge](https://github.com/fontforge/
 [license-badge]: http://img.shields.io/badge/license-GPLv3-blue.svg?style=flat-square
 [license]: https://github.com/limaconoob/Image2font/blob/master/LICENSE
 
+### Installation
+The [**image3font**](https://pypi.org/project/image3font) package is listed in the Python Package Index (PyPI), so you can install it with pip:
+```shell
+pip install image3font
+```
+
 ### Usage
 See command help:
 * **-h, --help** - show this help message and exit.
