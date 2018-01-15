@@ -9,33 +9,35 @@
 (import fontforge)
 
 (import [fontTools.ttLib [TTFont]])
-(import [fontTools.ttLib.tables.S_V_G_ [table_S_V_G_]])
-(import [fontTools.ttLib.tables._n_a_m_e [NameRecord table__n_a_m_e]])
+(import [fontTools.ttLib.tables.S-V-G- [table-S-V-G-]])
+(import [fontTools.ttLib.tables.-n-a-m-e [table--n-a-m-e]])
+(import [fontTools.ttLib.tables.-g-l-y-f [table--g-l-y-f]])
 
 (import [xml.etree.ElementTree :as ET])
 
 (import [table[*name* *platform*]])
 
 ;; Program's Source
-(def *source* "src")
+(def *source* (constantly "src"))
 ;; Program's name
 (def *prog* (constantly "image3font"))
 ;; Program's version
-(def *version* (constantly "1.0.1"))
+(def *version* (constantly "1.1.0"))
 
 ;; Fontforge's EM
-(def *font-em* 2048)
+(def *font-em* (constantly 2048))
 ;; Fontforge's Encoding
-(def *font-encoding* "UnicodeFull")
+(def *font-encoding* (constantly "UnicodeFull"))
 ;; Fontforge's Width
-(def *width* 512)
+(def *width* (constantly 512))
 
 ;; The structure Glyph is a path by id
 (defclass Glyph [object]
     [path id]
 
     ;; Return a structure Glyph
-    (defn --init-- [self path id]
+    (defn --init-- [self path id &optional [delete False]]
+        (setv self.delete delete)
         (setv self.path path)
         (setv self.id id)
 
@@ -55,9 +57,9 @@
             (do (setv width (re.sub "[^0-9\.]" "" (get root.attrib "width")))
                 (del (get root.attrib "width"))))
 
-        (setv scale (/ *font-em* (int height)))
+        (setv scale (/ (*font-em*) (int height)))
         (setv x 0)
-        (setv y (* -1 (- *font-em* (* *font-em* .2))))
+        (setv y (* -1 (- (*font-em*) (* (*font-em*) .2))))
         (setv g (ET.Element "g" {"transform" (.format "translate({},{}) scale({})" x y scale)}))
         (list (map (fn [element] (g.append element))
                    (root.getchildren)))
@@ -69,9 +71,12 @@
 
         (setv self.root root))
 
+  (defn __del__[self]
+      (if self.delete (os.remove self.path)))
+
   ;; Return glyph width
   (defn get-width[self]
-      (int (* *font-em* (/ self.width self.height))))
+      (int (* (*font-em*) (/ self.width self.height))))
 
   ;; Return our copy of blob
   (defn get-svg[self]
@@ -90,26 +95,28 @@
 ;; if the namefile containt '-', crop and return a set of image/vector
 ;; else convert the filename into a vector if isn't already and return it.
 
-(def *width* 150)
-(def *height* 200)
-
 (defn 3crop [source path &optional [begindex 0xe000]]
   (import [wand.image [Image]])
   (import [wand.display [display]])
+
+  ;; Imagemagick's width
+  (def *width* (constantly 142))
+  ;; Imagemagick's height
+  (def *height* (constantly 202))
+
   (setv image (Image :filename path))
   (setv (, width  height) image.size)
-  (setv (, x y) (, (int (/ width *width*)) (int (/ height *height*))))
+  (setv (, x y) (, (int (/ width (*width*))) (int (/ height (*height*)))))
   (list (map (fn [(, supindex (, y x))] (setv subimage (image.clone))
                                         (setv index (+ begindex supindex))
                                         (setv path (os.path.join source (.format "{:x}.svg" index)))
-                                        (print path  (* x *width*) (* y *height*) *width* *height*)
-                                        (subimage.crop (* x *width*) (* y *height*) :width *width* :height *height*)
+                                        (subimage.crop (* x (*width*)) (* y (*height*)) :width (*width*) :height (*height*))
                                         (subimage.save :filename path)
-                                        (Glyph path index))
+                                        (Glyph path index :delete True))
              (partition (interleave (range (* x y))
                                     (list-comp (, a b) (a (range y) b (range x))))))))
 
-(defn 3glyph [&optional [source *source*]]
+(defn 3glyph [&optional [source (*source*)]]
     (flatten (map (fn [(, (, name extension) path)] 
                        (setv index (.split name "-"))
                        (cond [(string? (second index)) (3crop source path :begindex (int (first index) 16))]
@@ -132,7 +139,7 @@
                                          (filter (fn [table] (table.isUnicode))
                                                  cmap.tables))))))
 
-    (setv table (table_S_V_G_))
+    (setv table (table-S-V-G-))
     (setv table.colorPalettes None)
     (setv table.docList (list (map (fn [glyph]
                                        (glyph.set-id (font.getGlyphID (cmap.get glyph.id)))
@@ -141,7 +148,7 @@
 
     (font.--setitem-- "SVG " table)
 
-    (setv table (table__n_a_m_e))
+    (setv table (table--n-a-m-e))
     (setv table.names [])
 
     (list (map (fn [(, id text)]
@@ -163,6 +170,20 @@
 
     (font.--setitem-- "name" table)
 
+    (setv glyf (font.--getitem-- "glyf"))
+    (setv notdef (glyf.glyphs.--getitem-- ".notdef"))
+
+    ;; Reverse engineering of .notdef
+    (notdef.fromXML "contour" () [(, "pt" {"x" "68" "y" "0" "on" "1"} ())
+                                  (, "pt" {"x" "68" "y" "1365" "on" "1"} ())
+                                  (, "pt" {"x" "612" "y" "1365" "on" "1"} ())
+                                  (, "pt" {"x" "612" "y" "0" "on" "1"} ())] ())
+    (notdef.fromXML "contour" () [(, "pt" {"x" "136" "y" "68" "on" "1"} ())
+                                  (, "pt" {"x" "544" "y" "68" "on" "1"} ())
+                                  (, "pt" {"x" "544" "y" "1297" "on" "1"} ())
+                                  (, "pt" {"x" "136" "y" "1297" "on" "1"} ())] ())
+    (notdef.fromXML "instructions" () [(, "assembly" () "")] ())
+
     (setv (, root filename) (os.path.split path))
     (setv hide (os.path.join root (+ "." filename)))
     (font.save hide)
@@ -179,8 +200,8 @@
     (setv font.fontname (submanifest.get "fontname"))
     (setv font.familyname (or (submanifest.get "familyname") (manifest.get "fontname")))
     (setv font.fullname (or (submanifest.get "fullname") (manifest.get "fontname")))
-    (setv font.em (int (or (submanifest.get "em") *font-em*)))
-    (setv font.encoding (or (submanifest.get "encoding") *font-encoding*))
+    (setv font.em (int (or (submanifest.get "em") (*font-em*))))
+    (setv font.encoding (or (submanifest.get "encoding") (*font-encoding*)))
     (if (submanifest.get "weight")
         (setv font.weight (submanifest.get "weight")))
     (if (submanifest.get "copyright")
@@ -198,17 +219,17 @@
     (font.addLookupSubtable "liga" "liga")
   
     ;; Reference: https://www.microsoft.com/typography/otspec180/recom.htm § Glyph 0: the .notdef glyph
-    (setv glyph (font.createChar -1 ".notdef"))
-    (setv glyph.width 0)
+    (setv char (font.createChar -1 ".notdef"))
+    (setv char.width 0)
     ;; Reference: https://www.microsoft.com/typography/otspec170/recom.htm § First Four Glyphs in Fonts
-    (setv glyph (font.createChar 0x0 ".null"))
-    (setv glyph.width *width*) 
-    (setv glyph (font.createChar 0xD "CR"))
-    (setv glyph.width *width*)
-    (setv glyph (font.createChar 0x20 "space"))
-    (setv glyph.width *width*)
+    (setv char (font.createChar 0x0 ".null"))
+    (setv char.width (*width*))
+    (setv char (font.createChar 0xD "CR"))
+    (setv char.width (*width*))
+    (setv char (font.createChar 0x20 "space"))
+    (setv char.width (*width*))
 
-    (setv glyphes (3glyph :source (or (manifest.get "source") *source*)))
+    (setv glyphes (3glyph :source (or (manifest.get "source") (*source*))))
     (list (map (fn [glyph]
                    (setv char (font.createChar glyph.id))
                    (char.importOutlines glyph.path)

@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="image3font",
-    version="1.0.1",
+    version="1.1.0",
     packages=["image3font"],
     package_data={
         "image3font": ["*.hy"],
@@ -16,14 +16,14 @@ setup(
         "docopt",
         "toml",
     ],
-#    extras_require = ["wand"],
+    extras_require = ["wand"],
     author="adjivas",
     author_email="adjivas@users.noreply.github.com",
     maintainer="adjivas",
     maintainer_email="adjivas@users.noreply.github.com",
     keywords=["fontforge", "fonttools"],
     description="""A image's converter to font written in Fontforge/FontTools's Hy script.""",
-    long_description=open("README.rst").read(),
+    long_description="README.rst",
     include_package_data=True,
     url="https://adjivas.github.io/image3font",
     platforms=["any"],
