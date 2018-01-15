@@ -78,24 +78,30 @@ List of fields according to
 specification.
 
 - **path**
+
 Path where save the compiled font.
 
 - **fontname**
+
 Name contained in the postscript FontName field.
 
 - **familyname** (default = "fontname")
+
 Name contained in the
 postscript FamilyName field. If not specified this will be inferred as
 fontname.
 
 - **fullname** (default = "fontname")
+
 Name contained in the postscript
 FullName field. If not specified this will be inferred as fontname.
 
 - **weight** (optional)
+
 Name contained in the postscript Weight field.
 
 - **copyright** (optional)
+
 Name contained in the postscript Notice
 field.
 
@@ -110,53 +116,67 @@ List of fields according to
 specification.
 
 - **copyright**
+
 Copyright string from the font vendor. © Copyright the
 Monotype Corporation plc, 1990.
 
 - **familyname**
+
 Name the user sees. Times New Roman
 
 - **subfamilyname**
+
 Name of the style. Bold
 
 - **unique\_id**
+
 A unique identifier that applications can store to
 identify the font being used. Monotype: Times New Roman Bold:1990
 
 - **full\_name**
+
 Complete, unique, human readable name of the font.
 This name is used by Windows. Times New Roman Bold
 
 - **version**
+
 Release and version information from the font vendor.
 Version 1.00 June 1, 1990, initial release.
 
 - **postscript\_name**
+
 Name the font will be known by on a PostScript
 printer. TimesNewRoman-Bold
 
 - **trademark**
+
 Trademark string. Times New Roman is a registered
 trademark of the Monotype Corporation.
 
 - **manufacturer**
+
 Manufacturer. Monotype Corporation. plc
 
 - **designer**
+
 Designer. Stanley Morison
 
 - **description**
+
 Description. Designed in 1932 for the Times of London
 newspaper. Excellent readability and a narrow overall width, allowing
 more words per line than most fonts.
 
 - **url\_vendor**
+
 URL of Vendor. <http://www.monotype.com>
 
 - **url\_designer** 
+
 URL of Designer. <http://www.monotype.com>
 
 - **license**
+
 License Description. This font may be installed on all of
 your machines and printers, but you may not sell or give these fonts to
 anyone else.
@@ -168,46 +188,56 @@ License Info URL. <http://www.monotype.com/license>
 Reserved.
 
 - **preferred\_familyname**
+
 Preferred Family. No name string present,
 since it is the same as name ID 1 (Font Family name).
 
 - **preferred\_subfamilyname**
+
 Preferred Subfamily. No name string
 present, since it is the same as name ID 2 (Font Subfamily name).
 
 - **compatible\_full**
+
 Compatible Full (Macintosh only). No name string
 present, since it is the same as name ID 4 (Full name).
 
 - **sample\_text**
+
 Sample text. quick brown fox jumps over the lazy
 dog.
 
 - **postscript\_cid**
+
 PostScript CID findfont name. No name string
 present. Thus, the PostScript Name defined by name ID 6 should be used
 with the "findfont" invocation for locating the font in the context of a
 PostScript interpreter.
 
 - **wws\_familyname**
+
 WWS family name: Since Times New Roman is a WWS
 font, this field does not need to be specified. If the font contained
 styles such as "caption", "display", "handwriting", etc, that would be
 noted here.
 
 - **wws\_subfamilyname**
+
 WWS subfamily name: Since Times New Roman is a
 WWS font, this field does not need to be specified.
 
 - **light\_background**
+
 Light background palette name. No name string
 present, since this is not a color font.
 
 - **dark\_background**
+
 Dark background palette name. No name string
 present, since this is not a color font.
 
 - **variations\_postscript**
+
 Variations PostScript name prefix. No name
 string present, since this is not a variable font.
 
