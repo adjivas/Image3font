@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="image3font",
-    version="1.1.0",
+    version="1.1.1",
     packages=["image3font"],
     package_data={
         "image3font": ["*.hy"],
@@ -23,7 +23,7 @@ setup(
     maintainer_email="adjivas@users.noreply.github.com",
     keywords=["fontforge", "fonttools"],
     description="""A image's converter to font written in Fontforge/FontTools's Hy script.""",
-    long_description="README.rst",
+    long_description="README.md",
     include_package_data=True,
     url="https://adjivas.github.io/image3font",
     platforms=["any"],
