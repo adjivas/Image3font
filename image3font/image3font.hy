@@ -33,84 +33,84 @@
 
 ;; The structure Glyph is a path by id
 (defclass Glyph [object]
-  [path id]
-
-  ;; Constructor of Glyph
-  (defn --init-- [self path id &optional [delete False]]
-      (setv self.delete delete)
-      (setv self.path path)
-      (setv self.id id)
-
-      (setv root (ET.fromstring (.read (open path))))
-
-      ;; Remove the viewBox/height/width attributes because there are inconsistently on IE{9..11} and Gecko.
-      (setv view-box (.split (str "0 0 200 200")))
-      (if (root.get "viewBox")
-          (do (setv view-box (.split (get root.attrib "viewBox")))
-              (del (get root.attrib "viewBox"))))
-      (setv height (get view-box 2))
-      (if (root.get "height")
-          (do (setv height (re.sub "[^0-9\.]" "" (get root.attrib "height")))
-              (del (get root.attrib "height"))))
-      (setv weight (get view-box 3))
-      (if (root.get "width")
-          (do (setv width (re.sub "[^0-9\.]" "" (get root.attrib "width")))
-              (del (get root.attrib "width"))))
-
-      (setv scale (/ (*font-em*) (int height)))
-      (setv x 0)
-      (setv y (* -1 (- (*font-em*) (* (*font-em*) .2))))
-      (setv g (ET.Element "g" {"transform" (.format "translate({},{}) scale({})" x y scale)}))
-      (list (map (fn [element] (g.append element))
-                 (root.getchildren)))
-      (root.clear)
-      (root.append g)
-
-      (setv self.height (float height))
-      (setv self.width (float width))
-
-      (setv self.root root))
-
-  ;; Destructor of Glyph
-  (defn __del__[self]
-      (if self.delete (os.remove self.path)))
-
-  ;; Return glyph width
-  (defn get-width[self]
-      (int (* (*font-em*) (/ self.width self.height))))
-
-  ;; Return our copy of blob
-  (defn get-svg[self]
-      (setv data (ET.tostring self.root :encoding "UTF-8"))
-      [data self.id self.id])
-
-  ;; Set the glyph identifier as glyph<glyphID> https://www.w3.org/2013/10/SVG_in_OpenType/#glyphids
-  (defn set-id[self id]
-      (setv self.id id)
-      (self.root.set "id" (.format "glyph{:d}" id))))
+    [path id]
+  
+    ;; Constructor of Glyph
+    (defn --init-- [self path id &optional [delete False]]
+        (setv self.delete delete)
+        (setv self.path path)
+        (setv self.id id)
+  
+        (setv root (ET.fromstring (.read (open path))))
+  
+        ;; Remove the viewBox/height/width attributes because there are inconsistently on IE{9..11} and Gecko.
+        (setv view-box (.split (str "0 0 200 200")))
+        (if (root.get "viewBox")
+            (do (setv view-box (.split (get root.attrib "viewBox")))
+                (del (get root.attrib "viewBox"))))
+        (setv height (get view-box 2))
+        (if (root.get "height")
+            (do (setv height (re.sub "[^0-9\.]" "" (get root.attrib "height")))
+                (del (get root.attrib "height"))))
+        (setv weight (get view-box 3))
+        (if (root.get "width")
+            (do (setv width (re.sub "[^0-9\.]" "" (get root.attrib "width")))
+                (del (get root.attrib "width"))))
+  
+        (setv scale (/ (*font-em*) (int height)))
+        (setv x 0)
+        (setv y (* -1 (- (*font-em*) (* (*font-em*) .2))))
+        (setv g (ET.Element "g" {"transform" (.format "translate({},{}) scale({})" x y scale)}))
+        (list (map (fn [element] (g.append element))
+                   (root.getchildren)))
+        (root.clear)
+        (root.append g)
+  
+        (setv self.height (float height))
+        (setv self.width (float width))
+  
+        (setv self.root root))
+  
+    ;; Destructor of Glyph
+    (defn --del--[self]
+        (if self.delete (os.remove self.path)))
+  
+    ;; Return glyph width
+    (defn get-width[self]
+        (int (* (*font-em*) (/ self.width self.height))))
+  
+    ;; Return our copy of blob
+    (defn get-svg[self]
+        (setv data (ET.tostring self.root :encoding "UTF-8"))
+        [data self.id self.id])
+  
+    ;; Set the glyph identifier as glyph<glyphID> https://www.w3.org/2013/10/SVG_in_OpenType/#glyphids
+    (defn set-id[self id]
+        (setv self.id id)
+        (self.root.set "id" (.format "glyph{:d}" id))))
 
 ;; Reference: http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html
 ;; crop a image from index's argument by  *width*/*height*'s global
 (defn 3crop [source path &optional [begindex 0xe000]]
-  (import [wand.image [Image]])
-  (import [wand.display [display]])
-
-  ;; Imagemagick's width
-  (def *width* (constantly 142))
-  ;; Imagemagick's height
-  (def *height* (constantly 202))
-
-  (setv image (Image :filename path))
-  (setv (, width  height) image.size)
-  (setv (, x y) (, (int (/ width (*width*))) (int (/ height (*height*)))))
-  (list (map (fn [(, supindex (, y x))] (setv subimage (image.clone))
-                                        (setv index (+ begindex supindex))
-                                        (setv path (os.path.join source (.format "{:x}.svg" index)))
-                                        (subimage.crop (* x (*width*)) (* y (*height*)) :width (*width*) :height (*height*))
-                                        (subimage.save :filename path)
-                                        (Glyph path index :delete True))
-             (partition (interleave (range (* x y))
-                                    (list-comp (, a b) (a (range y) b (range x))))))))
+    (import [wand.image [Image]])
+    (import [wand.display [display]])
+  
+    ;; Imagemagick's width
+    (def *width* (constantly 142))
+    ;; Imagemagick's height
+    (def *height* (constantly 202))
+  
+    (setv image (Image :filename path))
+    (setv (, width  height) image.size)
+    (setv (, x y) (, (int (/ width (*width*))) (int (/ height (*height*)))))
+    (list (map (fn [(, supindex (, y x))] (setv subimage (image.clone))
+                                          (setv index (+ begindex supindex))
+                                          (setv path (os.path.join source (.format "{:x}.svg" index)))
+                                          (subimage.crop (* x (*width*)) (* y (*height*)) :width (*width*) :height (*height*))
+                                          (subimage.save :filename path)
+                                          (Glyph path index :delete True))
+               (partition (interleave (range (* x y))
+                                      (list-comp (, a b) (a (range y) b (range x))))))))
 
 ;; Return a collection of glyphes
 ;; if the namefile containt '-', crop and return a set of image/vector
@@ -119,37 +119,37 @@
     (flatten (map (fn [(, (, name extension) path)] 
                        (setv index (.split name "-"))
                        (cond [(string? (second index)) (3crop source path :begindex (int (first index) 16))]
-                             [True (Glyph path (int (first index) 16))])
-                  )
+                             [True (Glyph path (int (first index) 16))]))
                   (list (map (fn [file] (, (os.path.splitext file) (os.path.join source file)))
                              (sorted (os.listdir source)))))))
-;; add svg, namerecord
+
+;; add tables: "SVG " and "name".
 (defn 3table [manifest glyphes]
     (setv path (.get (manifest.get "fontforge") "path"))
     (setv font (TTFont path))
     (setv submanifest (manifest.get "fontools"))
-
+  
     ;; Avoid "ns0:"
     ;; Reference: https://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.register_namespace
     (ET.register-namespace "" "http://www.w3.org/2000/svg")
-
+  
     (setv cmap (font.get "cmap"))
     (setv cmap (dict (partition (flatten (map (fn [table] (table.cmap.items))
                                          (filter (fn [table] (table.isUnicode))
                                                  cmap.tables))))))
-
+  
     (setv table (table-S-V-G-))
     (setv table.colorPalettes None)
     (setv table.docList (list (map (fn [glyph]
                                        (glyph.set-id (font.getGlyphID (cmap.get glyph.id)))
                                        (glyph.get-svg))
                               glyphes)))
-
+  
     (font.--setitem-- "SVG " table)
-
+  
     (setv table (table--n-a-m-e))
     (setv table.names [])
-
+  
     (list (map (fn [(, id text)]
                    (table.setName (unicode text) id
                                   (:id (:unicode *platform*))
@@ -166,12 +166,12 @@
                (filter (fn [(, _ value)] (not (none? value)))
                                          (map (fn [(, index key)] (, index (submanifest.get key)))
                                                                   (partition (interleave (iterate inc 0) *name*))))))
-
+  
     (font.--setitem-- "name" table)
-
+  
     (setv glyf (font.--getitem-- "glyf"))
     (setv notdef (glyf.glyphs.--getitem-- ".notdef"))
-
+  
     ;; Reverse engineering of .notdef
     (notdef.fromXML "contour" () [(, "pt" {"x" "68" "y" "0" "on" "1"} ())
                                   (, "pt" {"x" "68" "y" "1365" "on" "1"} ())
@@ -182,7 +182,7 @@
                                   (, "pt" {"x" "544" "y" "1297" "on" "1"} ())
                                   (, "pt" {"x" "136" "y" "1297" "on" "1"} ())] ())
     (notdef.fromXML "instructions" () [(, "assembly" () "")] ())
-
+  
     (setv (, root filename) (os.path.split path))
     (setv hide (os.path.join root (+ "." filename)))
     (font.save hide)
