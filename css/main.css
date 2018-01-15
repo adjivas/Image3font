@@ -1,0 +1,318 @@
+@font-face {
+  font-family: neko;
+  src: url("../font/neko.ttf");
+}
+
+@keyframes message {
+  0% {
+    content: "Hello";
+  }
+  30% {
+    content: "Hey, I'm a text";
+  }
+  60% {
+    content: "My name is Wikipe-tan";
+  }
+  100% {
+    content: "What's up?";
+  }
+}
+
+
+@keyframes visible {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.command {
+  color: rgba(132, 197, 204, 1);
+}
+
+.option {
+  color: rgba(147, 81, 182, 1);
+}
+
+.value {
+  color: rgba(72, 58, 170, 1);
+}
+
+h1::after,
+h2::after,
+h3::after,
+h4::after,
+h5::after,
+h6::after {
+  position: fixed;
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  bottom: 312px;
+  left: 0px;
+  padding-left: 1.5%;
+  margin-right: 1.5%;
+  width: 20%;
+  height: 200px;
+  white-space: pre-line;
+  font-size: 1.3cm;
+  font-family: neko;
+  background-color: white;
+  color: black;
+}
+
+#welcome:target::after {
+  content: "welcome";
+  animation: visible 10s linear 1 normal;
+  opacity: 0;
+}
+
+#usage:target::after {
+  content: "usage";
+  animation: visible 10s linear 1 normal;
+  opacity: 0;
+}
+#docker:target::after {
+  content: "docker = marcel";
+  animation: visible 10s linear 1 normal;
+  opacity: 0;
+}
+#cli:target::after {
+  content: "python image2font --help";
+  animation: visible 10s linear 1 normal;
+  opacity: 0;
+}
+#license:target::after {
+  content: "by @limaconoob and @adjivas";
+  animation: visible 10s linear 1 normal;
+  opacity: 0;
+}
+#dependencies:target::after {
+  content: "Wikipedia \2665";
+  animation: visible 10s linear 1 normal;
+  opacity: 0;
+}
+
+body {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+  margin: 40px 0px 0px 0px;
+}
+
+nav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  width: 23%;
+}
+
+section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  width: 54%;
+}
+
+nav aside {
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  color: rgb(120, 166, 171);
+}
+
+nav aside pre {
+  margin: inherit;
+  outline: none;
+  font-size: 3vh;
+  font-family: neko;
+}
+
+nav aside pre::before {
+  content: "";
+  overflow-y: scroll;
+  animation: message 15s linear infinite reverse;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  white-space: pre-line;
+  width: 85.5%;
+  height: 200px;
+  bottom: 125%;
+  left: 0px;
+  margin-left: 8%;
+  margin-right: 8%;
+  background-color: white;
+  color: black;
+}
+
+nav aside:hover pre::before {
+  content: "Hey don't touch me";
+  animation: none;
+}
+
+section header h1 {
+  color: rgba(62, 67, 73, 1);
+  text-transform: capitalize;
+  font-weight: normal;
+  font-family: 'Garamond', 'Georgia', serif;
+  font-size: 240%;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+section header h2, article h2, footer h2 {
+  color: rgba(62, 67, 73, 1);
+  text-transform: capitalize;
+  font-weight: normal;
+  font-family: 'Garamond', 'Georgia', serif;
+  font-size: 180%;
+  margin: 30px 0px 10px 0px;
+}
+
+section header h3, article h3, footer h3 {
+  color: rgba(62, 67, 73, 1);
+  text-transform: capitalize;
+  font-weight: normal;
+  font-family: 'Garamond', 'Georgia', serif;
+  font-size: 150%;
+  margin: 30px 0px 10px 0px;
+}
+
+section header h4, article h4, footer h4 {
+  color: rgba(62, 67, 73, 1);
+  text-transform: capitalize;
+  font-weight: normal;
+  font-family: 'Garamond', 'Georgia', serif;
+  font-size: 130%;
+  margin: 30px 0px 10px 0px;
+}
+
+section header h1::after, article h1::after, footer h1::after,
+section header h2::after, article h2::after, footer h2::after,
+section header h3::after, article h3::after, footer h3::after,
+section header h4::after, article h4::after, footer h4::after {
+  text-transform: none;
+}
+
+article {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+article pre {
+  overflow-x: auto;
+  background-color: rgba(238, 238, 238, 0.8);
+  font-family: 'Consolas', 'Menlo', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+  font-size: 0.9em;
+  padding: 7px 30px;
+  margin: 15px 0px;
+  line-height: 1.3em;
+}
+
+nav menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0px 0px 0px 0px;
+  margin: 40px 0px 0px 0px;
+  height: 100%;
+  width: 100%;
+}
+
+nav menu ul {
+  list-style: square;
+  list-style-position: inside;
+  width: 75%;
+}
+
+nav menu > ul {
+  padding: 0px;
+}
+
+nav menu p {
+  color: rgba(68, 68, 68, 1);
+  text-transform: capitalize;
+  font-family: 'Garamond', 'Georgia', serif;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0px 0px 5px 0px;
+  width: 75%;
+}
+
+nav menu a {
+  color: rgba(68, 68, 68, 1);
+  font-size: 14px;
+  line-height: 1.5;
+  text-decoration: none;
+  text-transform: capitalize;
+  border-bottom: 1px dotted #999;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+  color: rgba(221, 221, 221, 0);
+  text-decoration: none;
+  padding: 0 4px;
+}
+
+h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a, h6:hover a {
+  color: rgba(221, 221, 221, 1);
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+  color: rgba(62, 67, 73, 1);
+  text-decoration: none;
+  padding: 0 4px;
+}
+
+section header p a, article p a, footer p a, footer li a, nav aside p a, nav p a {
+  color: rgba(62, 67, 73, 1);
+  text-decoration: none;
+  border-bottom: 1px dotted #999;
+}
+
+section header p a, article p a, footer p a, footer li a, nav aside p a, nav p a {
+  text-transform: capitalize;
+}
+
+section header p, article p, footer p, nav aside p {
+  font-family: 'goudy old style', 'minion pro', 'bell mt', Georgia, 'Hiragino Mincho Pro', serif;
+  font-size: 17px;
+  color: rgba(62, 67, 73, 1);
+  line-height: 1.4em;
+}
+
+section header p:first-letter, article p:first-letter, footer p:first-letter {
+  text-transform: capitalize
+}

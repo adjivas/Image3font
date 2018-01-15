@@ -1,4 +1,0 @@
--e git+https://github.com/hylang/hy.git#egg=hy
-fonttools
-docopt
-toml
