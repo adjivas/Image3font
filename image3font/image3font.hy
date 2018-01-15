@@ -33,44 +33,45 @@
 
 ;; The structure Glyph is a path by id
 (defclass Glyph [object]
-    [path id]
+  [path id]
 
-    ;; Return a structure Glyph
-    (defn --init-- [self path id &optional [delete False]]
-        (setv self.delete delete)
-        (setv self.path path)
-        (setv self.id id)
+  ;; Constructor of Glyph
+  (defn --init-- [self path id &optional [delete False]]
+      (setv self.delete delete)
+      (setv self.path path)
+      (setv self.id id)
 
-        (setv root (ET.fromstring (.read (open path))))
+      (setv root (ET.fromstring (.read (open path))))
 
-        ;; Remove the viewBox/height/width attributes because there are inconsistently on IE{9..11} and Gecko.
-        (setv view-box (.split (str "0 0 200 200")))
-        (if (root.get "viewBox")
-            (do (setv view-box (.split (get root.attrib "viewBox")))
-                (del (get root.attrib "viewBox"))))
-        (setv height (get view-box 2))
-        (if (root.get "height")
-            (do (setv height (re.sub "[^0-9\.]" "" (get root.attrib "height")))
-                (del (get root.attrib "height"))))
-        (setv weight (get view-box 3))
-        (if (root.get "width")
-            (do (setv width (re.sub "[^0-9\.]" "" (get root.attrib "width")))
-                (del (get root.attrib "width"))))
+      ;; Remove the viewBox/height/width attributes because there are inconsistently on IE{9..11} and Gecko.
+      (setv view-box (.split (str "0 0 200 200")))
+      (if (root.get "viewBox")
+          (do (setv view-box (.split (get root.attrib "viewBox")))
+              (del (get root.attrib "viewBox"))))
+      (setv height (get view-box 2))
+      (if (root.get "height")
+          (do (setv height (re.sub "[^0-9\.]" "" (get root.attrib "height")))
+              (del (get root.attrib "height"))))
+      (setv weight (get view-box 3))
+      (if (root.get "width")
+          (do (setv width (re.sub "[^0-9\.]" "" (get root.attrib "width")))
+              (del (get root.attrib "width"))))
 
-        (setv scale (/ (*font-em*) (int height)))
-        (setv x 0)
-        (setv y (* -1 (- (*font-em*) (* (*font-em*) .2))))
-        (setv g (ET.Element "g" {"transform" (.format "translate({},{}) scale({})" x y scale)}))
-        (list (map (fn [element] (g.append element))
-                   (root.getchildren)))
-        (root.clear)
-        (root.append g)
+      (setv scale (/ (*font-em*) (int height)))
+      (setv x 0)
+      (setv y (* -1 (- (*font-em*) (* (*font-em*) .2))))
+      (setv g (ET.Element "g" {"transform" (.format "translate({},{}) scale({})" x y scale)}))
+      (list (map (fn [element] (g.append element))
+                 (root.getchildren)))
+      (root.clear)
+      (root.append g)
 
-        (setv self.height (float height))
-        (setv self.width (float width))
+      (setv self.height (float height))
+      (setv self.width (float width))
 
-        (setv self.root root))
+      (setv self.root root))
 
+  ;; Destructor of Glyph
   (defn __del__[self]
       (if self.delete (os.remove self.path)))
 
@@ -88,13 +89,8 @@
       (setv self.id id)
       (self.root.set "id" (.format "glyph{:d}" id))))
 
-;; Reference: http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html#crop-images
+;; Reference: http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html
 ;; crop a image from index's argument by  *width*/*height*'s global
-;;! TODO have a range argument: start, end.
-;; Reference: http://docs.wand-py.org/en/0.4.4/guide/read.html#open-an-image-file
-;; if the namefile containt '-', crop and return a set of image/vector
-;; else convert the filename into a vector if isn't already and return it.
-
 (defn 3crop [source path &optional [begindex 0xe000]]
   (import [wand.image [Image]])
   (import [wand.display [display]])
@@ -116,6 +112,9 @@
              (partition (interleave (range (* x y))
                                     (list-comp (, a b) (a (range y) b (range x))))))))
 
+;; Return a collection of glyphes
+;; if the namefile containt '-', crop and return a set of image/vector
+;; else convert the filename into a vector if isn't already and return it.
 (defn 3glyph [&optional [source (*source*)]]
     (flatten (map (fn [(, (, name extension) path)] 
                        (setv index (.split name "-"))

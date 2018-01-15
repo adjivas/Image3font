@@ -1,3 +1,5 @@
+#! /usr/bin/env hy
+
 ;; name — Naming Table: https://www.microsoft.com/typography/otspec180/name.htm
 
 ;; Platform IDs: https://www.microsoft.com/typography/otspec180/name.htm#plat
