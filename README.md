@@ -281,5 +281,7 @@ Many thanks goes to *command/etc*'s project:
     license](https://github.com/docopt/docopt/blob/master/LICENSE-MIT).
 -   [Toml](https://github.com/uiri/toml) - [MIT Open Source
     license](https://github.com/uiri/toml/blob/master/LICENSE).
+-   [Wand](https://github.com/dahlia/wand) - [MIT Open Source
+    license](https://github.com/dahlia/wand/blob/master/LICENSE).
 -   [Wikipedia (for the picture
     neko!)](https://en.wikipedia.org/wiki/Catgirl).
