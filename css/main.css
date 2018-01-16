@@ -151,6 +151,7 @@ nav aside pre {
   outline: none;
   font-size: 3vh;
   font-family: neko;
+  line-height: 98%;
 }
 
 nav aside pre::before {
