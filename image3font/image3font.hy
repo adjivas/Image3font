@@ -22,7 +22,7 @@
 ;; Program's name
 (def *prog* (constantly "image3font"))
 ;; Program's version
-(def *version* (constantly "1.1.1"))
+(def *version* (constantly "1.1.2"))
 
 ;; Fontforge's EM
 (def *font-em* (constantly 2048))
