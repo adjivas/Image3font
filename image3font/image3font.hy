@@ -91,22 +91,22 @@
 
 ;; Reference: http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html
 ;; crop a image from index's argument by  *width*/*height*'s global
-(defn 3crop [source path &optional [begindex 0xe000]]
+(defn 3crop [source path segy segx &optional [begindex 0xe000]]
     (import [wand.image [Image]])
     (import [wand.display [display]])
   
-    ;; Imagemagick's width
-    (def *width* (constantly 142))
-    ;; Imagemagick's height
-    (def *height* (constantly 202))
-  
     (setv image (Image :filename path))
     (setv (, width  height) image.size)
-    (setv (, x y) (, (int (/ width (*width*))) (int (/ height (*height*)))))
-    (list (map (fn [(, supindex (, y x))] (setv subimage (image.clone))
+  
+    ;; Imagemagick's width
+    (def w (int (/ width segx)))
+    ;; Imagemagick's height
+    (def h (int (/ height segy)))
+    (setv (, x y) (, (int (/ width w)) (int (/ height h))))
+    (list (map (fn [(, supindex (, pxy pxx))] (setv subimage (image.clone))
                                           (setv index (+ begindex supindex))
                                           (setv path (os.path.join source (.format "{:x}.svg" index)))
-                                          (subimage.crop (* x (*width*)) (* y (*height*)) :width (*width*) :height (*height*))
+                                          (subimage.crop (* pxx w) (* pxy h) :width w :height h)
                                           (subimage.save :filename path)
                                           (Glyph path index :delete True))
                (partition (interleave (range (* x y))
@@ -117,9 +117,12 @@
 ;; else convert the filename into a vector if isn't already and return it.
 (defn 3glyph [&optional [source (*source*)]]
     (flatten (map (fn [(, (, name extension) path)] 
-                       (setv index (.split name "-"))
-                       (cond [(string? (second index)) (3crop source path :begindex (int (first index) 16))]
-                             [True (Glyph path (int (first index) 16))]))
+                       (setv group (.split name "-"))
+                       (if (= (len group) 3)
+                           (do
+                              (setv (, index segy segx) group)
+                              (3crop source path (int segy) (int segx) :begindex (int index 16)))
+                           (Glyph path (int (first group) 16))))
                   (list (map (fn [file] (, (os.path.splitext file) (os.path.join source file)))
                              (sorted (os.listdir source)))))))
 
@@ -127,7 +130,7 @@
 (defn 3table [manifest glyphes]
     (setv path (.get (manifest.get "fontforge") "path"))
     (setv font (TTFont path))
-    (setv submanifest (manifest.get "fontools"))
+    (setv submanifest (or (manifest.get "fontools") {}))
   
     ;; Avoid "ns0:"
     ;; Reference: https://docs.python.org/2/library/xml.etree.elementtree.html#xml.etree.ElementTree.register_namespace
@@ -197,8 +200,8 @@
     (assert (submanifest.get "path"))
     (assert (submanifest.get "fontname"))
     (setv font.fontname (submanifest.get "fontname"))
-    (setv font.familyname (or (submanifest.get "familyname") (manifest.get "fontname")))
-    (setv font.fullname (or (submanifest.get "fullname") (manifest.get "fontname")))
+    (setv font.familyname (or (submanifest.get "familyname") (submanifest.get "fontname")))
+    (setv font.fullname (or (submanifest.get "fullname") (submanifest.get "fontname")))
     (setv font.em (int (or (submanifest.get "em") (*font-em*))))
     (setv font.encoding (or (submanifest.get "encoding") (*font-encoding*)))
     (if (submanifest.get "weight")

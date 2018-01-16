@@ -29,8 +29,8 @@ See command help:
 ```
 image3font.toml
 src/
-src/{:x}.svg
-src/{:x}-.svg (need the wand dependency)
+src/{:hex}.svg
+src/{:hex}-{:y}-{:x}.svg (need the wand dependency)
 ```
 
 -   **image3font.toml** stores in the root of your project.
