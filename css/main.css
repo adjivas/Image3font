@@ -171,6 +171,7 @@ nav aside pre::before {
   margin-right: 8%;
   background-color: white;
   color: black;
+  pointer-events: none;
 }
 
 nav aside:hover pre::before {
