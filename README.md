@@ -29,12 +29,12 @@ See command help:
 ```
 image3font.toml
 src/
-src/{:hex}.svg
+src/{:hex}.{svg,jpeg,...}
 src/{:hex}-{:y}-{:x}.svg (need the wand dependency)
 ```
 
 -   **image3font.toml** stores in the root of your project.
--   **image/SVG** goes in the **src** directory.
+-   **image** goes in the **src** directory.
 
 ### Dependency
 
@@ -52,9 +52,6 @@ The [requirements.txt](requirements.txt) describes the image3font's dependencies
 -   [docopt](https://github.com/docopt/docopt) - Pythonic command line
     arguments parser.
 -   [toml](https://github.com/uiri/toml) - Python lib for TOML.
-
-The [requirements-wand.txt](requirements-wand.txt) is optional, that needed to extract a sub-rectangle from an image/SVG:
-
 -   [wand](https://github.com/dahlia/wand) - The ctypes-based simple [ImageMagick](https://github.com/ImageMagick/ImageMagick) binding for Python (tested on imagemagick6 6.9.9.33-1).
 
 

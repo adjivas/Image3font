@@ -8,6 +8,8 @@
 
 (import fontforge)
 
+(import [wand.image [Image]])
+
 (import [fontTools.ttLib [TTFont]])
 (import [fontTools.ttLib.tables.S-V-G- [table-S-V-G-]])
 (import [fontTools.ttLib.tables.-n-a-m-e [table--n-a-m-e]])
@@ -22,7 +24,7 @@
 ;; Program's name
 (def *prog* (constantly "image3font"))
 ;; Program's version
-(def *version* (constantly "1.1.2"))
+(def *version* (constantly "1.1.3"))
 
 ;; Fontforge's EM
 (def *font-em* (constantly 2048))
@@ -91,26 +93,34 @@
 
 ;; Reference: http://docs.wand-py.org/en/0.4.4/guide/resizecrop.html
 ;; crop a image from index's argument by  *width*/*height*'s global
-(defn 3crop [source path segy segx &optional [begindex 0xe000]]
-    (import [wand.image [Image]])
-    (import [wand.display [display]])
-  
+(defn 3crop [source path group]
+    (setv (, index segy segx) group)
+    (setv index (int index 16))
+
     (setv image (Image :filename path))
     (setv (, width  height) image.size)
   
     ;; Imagemagick's width
-    (def w (int (/ width segx)))
+    (def w (/ width (int segx)))
     ;; Imagemagick's height
-    (def h (int (/ height segy)))
+    (def h (/ height (int segy)))
+
     (setv (, x y) (, (int (/ width w)) (int (/ height h))))
     (list (map (fn [(, supindex (, pxy pxx))] (setv subimage (image.clone))
-                                          (setv index (+ begindex supindex))
-                                          (setv path (os.path.join source (.format "{:x}.svg" index)))
-                                          (subimage.crop (* pxx w) (* pxy h) :width w :height h)
+                                          (setv reindex (+ index supindex))
+                                          (setv path (os.path.join source (.format "{:x}.svg" reindex)))
+                                          (subimage.crop (int (* pxx w)) (int (* pxy h)) :width (int w) :height (int h))
                                           (subimage.save :filename path)
-                                          (Glyph path index :delete True))
+                                          (Glyph path reindex :delete True))
                (partition (interleave (range (* x y))
                                       (list-comp (, a b) (a (range y) b (range x))))))))
+
+(defn 3format [source path name]
+    (setv image (Image :filename path))
+    (setv path (os.path.join source (.format "{:s}.svg" name)))
+
+    (image.save :filename path)
+    (Glyph path (int name 16)))
 
 ;; Return a collection of glyphes
 ;; if the namefile containt '-', crop and return a set of image/vector
@@ -119,10 +129,10 @@
     (flatten (map (fn [(, (, name extension) path)] 
                        (setv group (.split name "-"))
                        (if (= (len group) 3)
-                           (do
-                              (setv (, index segy segx) group)
-                              (3crop source path (int segy) (int segx) :begindex (int index 16)))
-                           (Glyph path (int (first group) 16))))
+                           (3crop source path group)
+                           (if (= extension "svg")
+                               (Glyph path (int name 16))
+                               (3format source path name))))
                   (list (map (fn [file] (, (os.path.splitext file) (os.path.join source file)))
                              (sorted (os.listdir source)))))))
 
