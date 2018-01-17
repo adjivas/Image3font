@@ -2,3 +2,4 @@
 fonttools
 docopt
 toml
+wand

@@ -15,7 +15,7 @@ setup(
         "fonttools",
         "docopt",
         "toml",
-#        "wand",
+        "wand",
     ],
     author="adjivas",
     author_email="adjivas@users.noreply.github.com",
